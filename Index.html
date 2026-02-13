@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إلى فرح قلبى</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri&family=Tajawal:wght@300;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* شاشة القفل */
+        #login-screen {
+            text-align: center;
+            z-index: 100;
+        }
+
+        .heart {
+            color: #ff4d4d;
+            font-size: 50px;
+            animation: beat 1s infinite;
+        }
+
+        @keyframes beat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        input {
+            padding: 10px;
+            border-radius: 20px;
+            border: none;
+            text-align: center;
+            margin-top: 20px;
+            outline: none;
+        }
+
+        button {
+            padding: 10px 25px;
+            border-radius: 20px;
+            border: none;
+            background: #ff4d4d;
+            color: white;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* المحتوى الرئيسي */
+        #main-content {
+            display: none;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 1.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .active { display: block; }
+
+        .timeline-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            border-right: 4px solid #ff4d4d;
+        }
+
+        #timer {
+            font-size: 1.2rem;
+            color: #ffcccc;
+            font-weight: bold;
+        }
+
+        .nav-buttons { margin-top: 30px; }
+        
+        h1 { font-family: 'Amiri', serif; color: #ff4d4d; }
+    </style>
+</head>
+<body>
+
+    <div id="login-screen">
+        <div class="heart">❤️</div>
+        <h1>مرحباً يا فرحي..</h1>
+        <p>أدخلي كلمة السر لتفتحي قلبي</p>
+        <input type="password" id="passwordField" placeholder="كلمة السر...">
+        <br>
+        <button onclick="checkPassword()">دخول</button>
+    </div>
+
+    <div id="main-content">
+        
+        <div class="section active" id="sec1">
+            <h1>عيد حب سعيد يا فرح</h1>
+            <p>أردت أن أصنع لكِ شيئاً يشبهك، شيئاً لا ينتهي بانتهاء اليوم، بل يبقى ذكرى لكل ثانية عشناها معاً.</p>
+            <div class="nav-buttons">
+                <button onclick="nextSec(2)">لنرى ذكرياتنا</button>
+            </div>
+        </div>
+
+        <div class="section" id="sec2">
+            <h1>شريط ذكرياتنا</h1>
+            
+            <div class="timeline-box">
+                <h3>يوم الاعتراف (بعد فوات الأوان)</h3>
+                <p>رغم أن الكلمات تأخرت، إلا أنها حين خرجت، كانت أصدق ما نطق به قلبي يوماً.</p>
+            </div>
+
+            <div class="timeline-box">
+                <h3>القبلة الأولى</h3>
+                <p>في تلك اللحظة، توقف الزمن تماماً، ولم أعد أسمع سوى دقات قلبينا.</p>
+            </div>
+
+            <div class="timeline-box" style="border-right-color: #555;">
+                <h3>الوداع الأخير (أسوأ يوم)</h3>
+                <p>كان يوماً ثقيلاً، كأن العالم كله ضاق في عيني.. لكنه علمني أن غيابك هو أكثر ما أخشاه.</p>
+            </div>
+
+            <div class="nav-buttons">
+                <button onclick="nextSec(3)">كم مضى علينا؟</button>
+            </div>
+        </div>
+
+        <div class="section" id="sec3">
+            <h1>رحلتنا معاً</h1>
+            <p>نحن معاً منذ 1 فبراير 2024</p>
+            <div id="timer"></div>
+            <p style="margin-top: 20px;">وكل ثانية تمر، أحبكِ فيها أكثر.</p>
+            <div class="nav-buttons">
+                <button onclick="nextSec(4)">كلمتي الأخيرة</button>
+            </div>
+        </div>
+
+        <div class="section" id="sec4">
+            <h1>إلى الأبد؟</h1>
+            <p>يا فرح، أنتِ لستِ مجرد حبيبة، أنتِ الجزء الذي كان ناقصاً مني واكتمل بكِ. شكراً لأنكِ في حياتي.</p>
+            <div class="heart">❤️</div>
+            <p><b>أحبكِ دائماً وأبداً.</b></p>
+        </div>
+
+    </div>
+
+    <script>
+        // التحقق من كلمة السر
+        function checkPassword() {
+            const pass = document.getElementById('passwordField').value;
+            if(pass.toLowerCase() === 'farah') {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                startTimer();
+            } else {
+                alert('خطأ.. حاولي مرة أخرى يا فرحي');
+            }
+        }
+
+        // التنقل بين الصفحات
+        function nextSec(num) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById('sec' + num).classList.add('active');
+        }
+
+        // العداد التنازلي (التصاعدي في الواقع)
+        function startTimer() {
+            const startDate = new Date("February 1, 2024 00:00:00").getTime();
+            
+            setInterval(function() {
+                const now = new Date().getTime();
+                const diff = now - startDate;
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById("timer").innerHTML = 
+                    days + " يوم و " + hours + " ساعة و " + 
+                    minutes + " دقيقة و " + seconds + " ثانية ";
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
